@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Respuesta</title>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+	integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet"
+	th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css}"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+
+<style type="text/css">
+	.boton {
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+<br/><br/><br/>
+	<div class="container">
+		<div class="jumbotron" style="text-align: center;">
+			<h1 th:text="${respuesta.getResibirArchivo()}"></h1>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div class="jumbotron" style="text-aling: center;">
+			<form method="post" th:action="@{/regresar}"
+				enctype="multipart/form-data" id="fileUploadForm" class="container">
+				<div class="form-group boton">
+					<button type="submit" class="btn btn-success">Regresar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

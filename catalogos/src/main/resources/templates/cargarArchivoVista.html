@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+	integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+	integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+	integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet"
+	th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css}"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+<title>Subir archivo Excel</title>
+<style>
+.pdf {
+	display: none;
+}
+
+.navprincipal {
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%);
+}
+
+.interno {
+	width: 800px;
+	position: absolute;
+	left: 0;
+	box-sizing: border-box;
+	display: table;
+	background: #ccc;
+}
+
+.interno ul {
+	width: 20%;
+	display: table-cell;
+	border-right: 2px solid rgba(255, 255, 255, .5);
+	box-sizing: border-box;
+}
+
+.pdf {
+	display: none;
+}
+
+#customFile .custom-file-control::after {
+	content: "Selecciona archivo Excel...";
+}
+
+#customFile .custom-file-control::before {
+	content: "Click me";
+}
+
+#customFile .custom-file-control:lang(es)::after {
+	content: "Seleccionar archivo...";
+}
+
+#customFile .custom-file-control:lang(es)::before {
+	content: "Seleccionar";
+}
+
+.custom-file-control.selected:lang(en)::after {
+	content: "" !important;
+}
+
+.custom-file {
+	overflow: hidden;
+}
+
+.custom-file-control {
+	white-space: nowrap;
+}
+
+.centrarIzquierda {
+	aling-text: left;
+}
+</style>
+
+<script type="text/javascript">
+	console.log("Hola");
+
+	//Funcion para mostrar el archivo PDF en la pagina html.
+	function mostrar() {
+		console.log("Hola mostar");
+		document.getElementById('pdf').style.display = 'block';
+		console.log()
+	}
+
+	//Funcion para ocultar el archivo PDf.
+	function ocultar() {
+		console.log("Hola")
+		document.getElementById('pdf').style.display = 'none';
+	}
+</script>
+</head>
+
+<body>
+	<div class="container" style="margin-top: 30px">
+		<div class="card">
+			<div class="jumbotron">
+				<h1 style="text-align: center;">Seleccionar archivo</h1>
+			</div>
+			<!-- 			<form method="post" th:action="@{/cargar2}" -->
+			<form style="text-align: center;" method="post"
+				th:action="@{/cargar}" enctype="multipart/form-data"
+				id="fileUploadForm" class="container">
+				<div class="form-group">
+					<label class="custom-file centrarIzquierda" id="customFile">Selecciona
+						<input type="file" class="custom-file-input" name="file"
+						aria-describedby="fileHelp"> <span
+						class="custom-file-control form-control-file boton1"></span>
+					</label>
+				</div>
+				<div style="margin-bottom: 10px">
+					<button type="submit" class="btn btn-success">Enviar</button>
+				</div>
+			</form>
+		</div>
+
+		<br> <br> <br>
+
+
+		<!-- 			Se agrega una lista y se muestra un pdf. No se puedo compeltar porque no funciona la referencia a una imagen con thymeleaf. -->
+		<!-- 		<div class=""> -->
+		<!-- 			<ul class="nav nav-tabs justify-content-center"> -->
+		<!-- 				<li class="nav-item dropdown"> -->
+		<!-- 					<button type="button" -->
+		<!-- 						class=" dropdown-toggle btn btn-outline-secondary" -->
+		<!-- 						data-toggle="dropdown">Lista de los nobres de las tablas -->
+		<!-- 					</button> -->
+		<!-- 					<div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+		<!-- 						<div class="interno"> -->
+		<!-- 							<ul> -->
+		<!-- 								<li><a class="dropdown-item">Aprobación</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Carrera</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Cliente</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Escuela</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Estatus_cita</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Estatus_cv</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Estatus_postulante</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Estatus_titulación</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Perfill</a></li> -->
+		<!-- 							</ul> -->
+		<!-- 							<ul> -->
+		<!-- 								<li><a class="dropdown-item">Sexo</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Tipo_entrevista</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Tipo_examen</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Cita</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Entrevista</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Examen</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Sección</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Postulante_b</a></li> -->
+		<!-- 								<li><a class="dropdown-item">Postulante_c</a></li> -->
+		<!-- 							</ul> -->
+		<!-- 						</div> -->
+
+
+		<!-- 					</div> -->
+		<!-- 				</li> -->
+		<!-- 				<li class="nav-item"> -->
+		<!-- 					<a class="nav-link active" href="#">Link</a> -->
+		<!-- 					<button type="button" class="btn  btn-outline-secondary" -->
+		<!-- 						onclick="mostrar()">Manual para crear un archivo Excel</button> -->
+		<!-- 				</li> -->
+		<!-- 				<li class="nav-item"> -->
+		<!-- 					<a class="nav-link active" href="#">Link</a> -->
+		<!-- 					<button type="button" class="btn  btn-outline-secondary">Lista -->
+		<!-- 						de restricciones</button> -->
+		<!-- 				</li> -->
+		<!-- 			</ul> -->
+		<!-- 		</div> -->
+		<!-- 	</div> -->
+		<!-- 	<br> -->
+
+		<!-- 	<div id="pdf" class="jumbotron container pdf"> -->
+		<!-- 		<div class="container"> -->
+		<!-- 			<button type="button" class="btn btn-secundary" onclick="ocultar()">Cerrar</button> -->
+		<!-- 		</div> -->
+		<!-- 		<!--     		<embed src="Instrucciones/Instrucciones.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="600px" /> -->
+		<!-- 		<embed -->
+		<!-- 			th:src="@{Instrucciones/Instrucciones.pdf#navpanes=0&scrollbar=0}" -->
+		<!-- 			src="./Instrucciones/Instrucciones.pdf#navpanes=0&scrollbar=0" -->
+		<!-- 			type="application/pdf" width="100%" height="600px" /> -->
+		<!-- 		<!-- 		<embed th:src="/Instrucciones/)@{./Instrucciones.pdf#navpanes=0&scrollbar=0}" src="./Instrucciones/Instrucciones.pdf#navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="600px" /> -->
+		<!-- 	</div> -->
+</body>
+<script>
+	$('.custom-file-input').on(
+			'change',
+			function() {
+				$(this).next('.form-control-file').addClass("selected").html(
+						$(this).val());
+			})
+</script>
+
+</html>
